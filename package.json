@@ -1,13 +1,13 @@
 {
-    "name": "vscode-wrap-console-log",
-    "displayName": "Wrap Console Log",
-    "description": "Wrap to console.log by word or selection",
+    "name": "vscode-wrap-console-log-simple",
+    "displayName": "Wrap Console Log Simple",
+    "description": "Wrap to console.log(or any function name) by word or selection",
     "repository": {
         "type": "git",
-        "url": "https://github.com/midnightsyntax/vscode-wrap-console-log"
+        "url": "https://github.com/wooodhead/vscode-wrap-console-log-simple"
     },
     "version": "1.6.2",
-    "publisher": "midnightsyntax",
+    "publisher": "wooodhead",
     "icon": "images/icon.png",
     "engines": {
         "vscode": "^1.5.0"
@@ -21,189 +21,32 @@
         "log"
     ],
     "activationEvents": [
-        "onCommand:console.log.wrap",
-        "onCommand:console.log.wrap.input",
-        "onCommand:console.log.wrap.prefix",
-        "onCommand:console.log.wrap.prefix.input",
-        "onCommand:console.log.wrap.up",
-        "onCommand:console.log.wrap.up.prefix",
-        "onCommand:console.log.wrap.up.prefix.input",
-        "onCommand:console.log.wrap.down",
-        "onCommand:console.log.wrap.down.prefix",
-        "onCommand:console.log.wrap.down.prefix.input",
-        "onCommand:console.log.wrap.string",
-        "onCommand:console.log.wrap.string.up",
-        "onCommand:console.log.wrap.string.down"
+        "onCommand:console.log.wrap.simple"
     ],
     "main": "out/extension.js",
     "contributes": {
         "configuration": {
-            "title": "Wrap Console Log",
+            "title": "Wrap Console Log Simple",
             "type": "object",
             "properties": {
-                "wrap-console-log.setCursorOnNewLine": {
-                    "type": "boolean",
-                    "title": "Configure the behavior of the cursor after a wrap up or down.",
-                    "description": "When enabled the cursor will jump to the line where 'console.log' got inserted. If disabled the cursor will stay on the same line as when you executed the command.",
-                    "default": false
-                },
-                "wrap-console-log.onEmptyLineAction": {
+                "wrap-console-log-simple.functionName": {
+                    "title": "function name",
+                    "description": "Replace console.log with any function name, e.g.: debug('variable', variable); ",
                     "type": "string",
-                    "enum": [
-                        "Insert",
-                        "Replace"
-                    ],
-                    "title": "The default action when logging up or down to empty lines",
-                    "description": "When logging up or down the extension \"pushes\" the existing lines in the document by inserting 'console.log' with a new line. This is how 'Insert', the default behaviour, work. This setting controls if the same method should be used when targeting empty lines. When the target line is empty 'Insert' will move the empty line and place the log on its orginal location. 'Replace' on the other hand will replace the empty line, using the same line for the log.",
-                    "default": "Insert"
-                },
-                "wrap-console-log.formatDocument": {
-                    "type": "boolean",
-                    "title": "Format Document after 'console.log' has been inserted.",
-                    "description": "When enabled run \"editor.action.formatDocument\" after 'console.log' has been inserted.",
-                    "default": false
-                },
-                "wrap-console-log.cursorPositionNewLine": {
-                    "type": "string",
-                    "enum": [
-                        "Left",
-                        "Right",
-                        "Same"
-                    ],
-                    "title": "Set the position of the cursor when it jumps to new lines.",
-                    "description": "When 'setCursorOnNewLine' is enabled this setting controls where on the new line the cursor should be placed. If 'setCursorOnNewLine' is disabled this setting will have no effect.",
-                    "default": "Right"
-                },
-                "wrap-console-log.alwaysInputBoxOnPrefix": {
-                    "type": "boolean",
-                    "title": "Always show input box when wrapping with a prefix.",
-                    "description": "If true an input box will always show when logging with a prefix.",
-                    "default": false
-                },
-                "wrap-console-log.alwaysUsePrefix": {
-                    "type": "boolean",
-                    "title": "Always log with the wrapped word as prefix.",
-                    "description": "If true ALL wraps will log with the selected word as prefix.",
-                    "default": false
-                },
-                "wrap-console-log.wrapText": {
-                    "title": "The text to wrap with.",
-                    "description": "Use $text to specify where in the string your variable/text should be placed.",
-                    "type": "string",
-                    "default": "console.log($txt);",
-                    "pattern": "\\$txt"
+                    "default": "console.log"
                 }
             }
         },
         "commands": [
             {
-                "command": "console.log.wrap",
-                "title": "Wrap console.log"
-            },
-            {
-                "command": "console.log.wrap.down",
-                "title": "Wrap down console log"
-            },
-            {
-                "command": "console.log.wrap.up",
-                "title": "Wrap up console log"
-            },
-            {
-                "command": "console.log.wrap.prefix",
-                "title": "Wrap prefix console log"
-            },
-            {
-                "command": "console.log.wrap.input",
-                "title": "Wrap input console log"
-            },
-            {
-                "command": "console.log.wrap.down.prefix",
+                "command": "console.log.wrap.simple",
                 "title": "Wrap down prefix console log"
-            },
-            {
-                "command": "console.log.wrap.up.prefix",
-                "title": "Wrap up prefix console log"
-            },
-            {
-                "command": "console.log.wrap.down.input",
-                "title": "Wrap down input console log"
-            },
-            {
-                "command": "console.log.wrap.up.input",
-                "title": "Wrap up input console log"
-            },
-            {
-                "command": "console.log.wrap.string",
-                "title": "Wrap console.log as string"
-            },
-            {
-                "command": "console.log.wrap.string.down",
-                "title": "Wrap down console.log as string"
-            },
-            {
-                "command": "console.log.wrap.string.up",
-                "title": "Wrap up console.log as string"
             }
         ],
         "keybindings": [
             {
-                "command": "console.log.wrap",
-                "key": "ctrl+alt+w w",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.string",
-                "key": "alt+shift+w w",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.string.down",
-                "key": "alt+shift+w down",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.string.up",
-                "key": "alt+shift+w up",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.down",
-                "key": "ctrl+alt+w down",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.up",
-                "key": "ctrl+alt+w up",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.prefix",
-                "key": "ctrl+alt+w ctrl+alt+w",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.input",
-                "key": "ctrl+shift+alt+w w",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.down.prefix",
-                "key": "ctrl+alt+w ctrl+alt+down",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.up.prefix",
-                "key": "ctrl+alt+w ctrl+alt+up",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.down.input",
-                "key": "ctrl+shift+alt+w down",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.up.input",
-                "key": "ctrl+shift+alt+w up",
+                "command": "console.log.wrap.simple",
+                "key": "cmd+l",
                 "when": "editorTextFocus"
             }
         ]

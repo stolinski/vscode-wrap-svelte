@@ -1,3 +1,9 @@
+# source code
+https://github.com/WooodHead/vscode-wrap-console-log-my
+
+# original project
+https://github.com/midnightsyntax/vscode-wrap-console-log
+
 # Wrap Console Log
 
 This extension wraps the word near your cursor and replaces it as an argument for `console.log`.
