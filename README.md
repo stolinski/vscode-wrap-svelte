@@ -1,5 +1,5 @@
 # source code
-https://github.com/WooodHead/vscode-wrap-console-log-my
+https://github.com/WooodHead/vscode-wrap-console-log-simple
 
 # original project
 https://github.com/midnightsyntax/vscode-wrap-console-log

@@ -1,7 +1,6 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import { window, QuickPickItem, workspace } from 'vscode';
 
 let currentEditor: vscode.TextEditor;
 
@@ -16,7 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
 }
 
-function handle(target: Wrap, prefix?: boolean, input?: boolean, formatAs?: FormatAs) {
+function handle(target: Wrap, prefix?: boolean) {
 
     new Promise((resolve, reject) => {
         let sel = currentEditor.selection;
@@ -69,10 +68,6 @@ interface WrapData {
     idx: number,
     line: number,
     lastLine: boolean
-}
-
-enum FormatAs {
-    String
 }
 
 enum Wrap {
