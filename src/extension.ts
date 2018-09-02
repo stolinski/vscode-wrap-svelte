@@ -32,18 +32,38 @@ function handle(target: Wrap, prefix?: boolean) {
             let doc = currentEditor.document;
             let lineNumber = ran.start.line;
             let item = doc.getText(ran);
+
             let idx = doc.lineAt(lineNumber).firstNonWhitespaceCharacterIndex;
             let ind = doc.lineAt(lineNumber).text.substring(0, idx);
-            const funcName = getSetting('wrapText');
-            let wrapData = { txt: getSetting('wrapText'), item: item, doc: doc, ran: ran, idx: idx, ind: ind, line: lineNumber, sel: sel, lastLine: doc.lineCount - 1 == lineNumber };
+            const funcName = getSetting('functionName')
+            let wrapData = {
+                txt: getSetting('functionName'),
+                item: item,
+                doc: doc,
+                ran: ran, idx: idx,
+                ind: ind,
+                line: lineNumber,
+                sel: sel,
+                lastLine: doc.lineCount - 1 == lineNumber
+            };
 
             wrapData.txt = funcName + "('".concat(wrapData.item, "', ", wrapData.item, ");");
             resolve(wrapData)
         };
 
+
     }).then((wrap: WrapData) => {
+        let nxtLine: vscode.TextLine;
+        let nxtLineInd: string;
+
+        if (!wrap.lastLine) {
+            nxtLine = wrap.doc.lineAt(wrap.line + 1);
+            nxtLineInd = nxtLine.text.substring(0, nxtLine.firstNonWhitespaceCharacterIndex);
+        } else {
+            nxtLineInd = "";
+        }
         currentEditor.edit((e) => {
-            e.insert(new vscode.Position(wrap.line, wrap.doc.lineAt(wrap.line).range.end.character), "\n".concat(wrap.txt));
+            e.insert(new vscode.Position(wrap.line, wrap.doc.lineAt(wrap.line).range.end.character), "\n".concat((nxtLineInd > wrap.ind ? nxtLineInd : wrap.ind), wrap.txt));
         }).then(() => {
             currentEditor.selection = wrap.sel;
         })
@@ -55,7 +75,7 @@ function handle(target: Wrap, prefix?: boolean) {
 }
 
 function getSetting(setting: string) {
-    return vscode.workspace.getConfiguration("wrap-console-log")[setting]
+    return vscode.workspace.getConfiguration("wrap-console-log-simple")[setting]
 }
 
 interface WrapData {
