@@ -9,12 +9,15 @@ https://github.com/midnightsyntax/vscode-wrap-console-log
 This extension read the word under your cursor and insert a statement with the word:
 
 alt + L: `console.log('variable');`
+
 cmd + L: `console.log('variable', variable);`
 
 In settings, replace `console.log` with your own function name,
 example:
+
 ```
 Wrap-console-log-simple: Function Name
+
 debug
 ```
 
