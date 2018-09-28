@@ -11,11 +11,14 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.window.onDidChangeActiveTextEditor(editor => currentEditor = editor);
 
     context.subscriptions.push(
-        vscode.commands.registerTextEditorCommand('console.log.wrap.simple', (editor, edit) => handle(Wrap.Down, true)),
+        vscode.commands.registerTextEditorCommand('console.log.wrap.nameValue', (editor, edit) => handle(Wrap.Down, true, 'nameValue')),
+    );
+    context.subscriptions.push(
+        vscode.commands.registerTextEditorCommand('console.log.wrap.name', (editor, edit) => handle(Wrap.Down, true, 'name')),
     );
 }
 
-function handle(target: Wrap, prefix?: boolean) {
+function handle(target: Wrap, prefix?: boolean, type?: string) {
 
     new Promise((resolve, reject) => {
         let sel = currentEditor.selection;
@@ -46,8 +49,11 @@ function handle(target: Wrap, prefix?: boolean) {
                 sel: sel,
                 lastLine: doc.lineCount - 1 == lineNumber
             };
-
-            wrapData.txt = funcName + "('".concat(wrapData.item, "', ", wrapData.item, ");");
+            if (type === 'nameValue') {
+                wrapData.txt = funcName + "('".concat(wrapData.item, "', ", wrapData.item, ");");
+            } else {
+                wrapData.txt = funcName + "('".concat(wrapData.item, "');");
+            }
             resolve(wrapData)
         };
 
