@@ -24,5 +24,6 @@ debug
 ```
 
 will output
-`debug('variable');`
-`debug('variable', variable);`
+```
+debug('variable');
+debug('variable', variable);
