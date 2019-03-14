@@ -28,7 +28,8 @@
     ],
     "activationEvents": [
         "onCommand:console.log.wrap.nameValue",
-        "onCommand:console.log.wrap.name"
+        "onCommand:console.log.wrap.name",
+        "onCommand:console.log.wrap.arguments"
     ],
     "main": "out/extension.js",
     "contributes": {
@@ -44,7 +45,8 @@
                 }
             }
         },
-        "commands": [{
+        "commands": [
+            {
                 "command": "console.log.wrap.nameValue",
                 "title": "console.log.wrap.nameValue"
             },
@@ -53,7 +55,8 @@
                 "title": "console.log.wrap.name"
             }
         ],
-        "keybindings": [{
+        "keybindings": [
+            {
                 "command": "console.log.wrap.nameValue",
                 "key": "cmd+l",
                 "when": "editorTextFocus"
@@ -61,6 +64,11 @@
             {
                 "command": "console.log.wrap.name",
                 "key": "alt+l",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "console.log.wrap.arguments",
+                "key": "alt+g",
                 "when": "editorTextFocus"
             }
         ]
