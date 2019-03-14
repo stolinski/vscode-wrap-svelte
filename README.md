@@ -12,6 +12,8 @@ This extension read the word under your cursor and insert a statement with the w
 alt + L: console.log('variable');
 
 cmd + L: console.log('variable', variable);
+
+alt + G: console.log('variable', arguments);
 ```
 
 In settings, replace `console.log` with your own function name,
