@@ -12,7 +12,7 @@
         "type": "git",
         "url": "https://github.com/wooodhead/vscode-wrap-console-log-simple"
     },
-    "version": "1.6.6",
+    "version": "1.6.7",
     "publisher": "wooodhead",
     "icon": "images/icon.png",
     "engines": {
@@ -59,6 +59,10 @@
             {
                 "command": "console.log.wrap.name",
                 "title": "console.log.wrap.name"
+            },
+            {
+                "command": "console.log.wrap.arguments",
+                "title": "console.log.wrap.arguments"
             }
         ],
         "keybindings": [
