@@ -59,12 +59,13 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
         sel: sel,
         lastLine: doc.lineCount - 1 == lineNumber,
       };
+      const semicolon = getSetting('useSemicolon') ? ';' : ''
       if (type === 'nameValue') {
-        wrapData.txt = funcName + "('".concat(wrapData.item, "', ", wrapData.item, ');');
+        wrapData.txt = funcName + "('".concat(wrapData.item, "', ", wrapData.item, ')', semicolon);
       } else if (type === 'arguments') {
-        wrapData.txt = funcName + "('".concat(wrapData.item, "', ", 'arguments', ');');
+        wrapData.txt = funcName + "('".concat(wrapData.item, "', ", 'arguments', ')', semicolon);
       } else {
-        wrapData.txt = funcName + "('".concat(wrapData.item, "');");
+        wrapData.txt = funcName + "('".concat(wrapData.item, "')", semicolon);
       }
       resolve(wrapData);
     }

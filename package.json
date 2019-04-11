@@ -42,6 +42,12 @@
                     "description": "Replace console.log with any function name, e.g.: debug('variable', variable); ",
                     "type": "string",
                     "default": "console.log"
+                },
+                "wrap-console-log-simple.useSemicolon": {
+                    "title": "use semicolon",
+                    "description": "Use semicolon at the end of the statements ",
+                    "type": "boolean",
+                    "default": true
                 }
             }
         },
