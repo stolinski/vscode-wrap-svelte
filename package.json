@@ -44,7 +44,7 @@
                     "default": "console.log"
                 },
                 "wrap-console-log-simple.useSemicolon": {
-                    "title": "function name",
+                    "title": "use semicolon",
                     "description": "Use semicolon at the end of the statements ",
                     "type": "boolean",
                     "default": true
