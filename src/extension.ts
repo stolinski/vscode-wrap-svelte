@@ -26,10 +26,17 @@ export function activate(context: vscode.ExtensionContext) {
       (editor, edit) => handle(Wrap.Down, true, 'arguments')
     )
   );
+  context.subscriptions.push(
+    vscode.commands.registerTextEditorCommand(
+      'console.log.wrap.get',
+      (editor, edit) => handle(Wrap.Down, true, 'get')
+    )
+  );
 }
 
 function handle(target: Wrap, prefix?: boolean, type?: string) {
   new Promise((resolve, reject) => {
+    console.log('type', type);
     let sel = currentEditor.selection;
     let len = sel.end.character - sel.start.character;
 
@@ -64,6 +71,8 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
         wrapData.txt = funcName + "('".concat(wrapData.item, "', ", wrapData.item, ')', semicolon);
       } else if (type === 'arguments') {
         wrapData.txt = funcName + "('".concat(wrapData.item, "', ", 'arguments', ')', semicolon);
+      } else if (type === 'get') {
+        wrapData.txt = "const aaa = get(".concat(wrapData.item, ", '", 'aaa', "', '')", semicolon);
       } else {
         wrapData.txt = funcName + "('".concat(wrapData.item, "')", semicolon);
       }
