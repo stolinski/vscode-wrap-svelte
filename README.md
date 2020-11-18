@@ -16,6 +16,9 @@ cmd + L: console.log('variable', variable);
 alt + G: console.log('variable', arguments);
 
 alt + E: const aaa = get('variable', 'aaa', '');
+
+alt + A: return variable;
+
 ```
 
 In settings, replace `console.log` with your own function name,
