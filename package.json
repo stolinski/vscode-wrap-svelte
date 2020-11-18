@@ -12,7 +12,7 @@
         "type": "git",
         "url": "https://github.com/wooodhead/vscode-wrap-console-log-simple"
     },
-    "version": "1.6.9",
+    "version": "1.6.10",
     "publisher": "wooodhead",
     "icon": "images/icon.png",
     "engines": {
@@ -30,7 +30,8 @@
         "onCommand:console.log.wrap.nameValue",
         "onCommand:console.log.wrap.name",
         "onCommand:console.log.wrap.arguments",
-        "onCommand:console.log.wrap.get"
+        "onCommand:console.log.wrap.get",
+        "onCommand:console.log.wrap.return"
     ],
     "main": "out/extension.js",
     "contributes": {
@@ -68,6 +69,10 @@
             {
                 "command": "console.log.wrap.get",
                 "title": "console.log.wrap.get"
+            },
+            {
+                "command": "console.log.wrap.return",
+                "title": "console.log.wrap.return"
             }
         ],
         "keybindings": [
@@ -90,6 +95,11 @@
                 "command": "console.log.wrap.get",
                 "key": "alt+e",
                 "when": "editorTextFocus"
+            },
+            {
+                "command": "console.log.wrap.return",
+                "key": "alt+a",
+                "when": "editorTextFocus"
             }
         ]
     },
@@ -97,7 +107,9 @@
         "@types/mocha": "^2.2.32",
         "@types/node": "^6.0.40",
         "mocha": "^2.3.3",
-        "typescript": "^2.0.3",
         "vscode": "^1.1.36"
+    },
+    "dependencies": {
+        "typescript": "^4.0.5"
     }
 }
