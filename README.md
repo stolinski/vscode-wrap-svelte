@@ -1,3 +1,5 @@
+# Demo
+![demo.gif](./demo.gif)
 # source code
 https://github.com/WooodHead/vscode-wrap-console-log-simple
 
