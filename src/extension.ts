@@ -86,7 +86,7 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
       } else if (type === 'return') {
         wrapData.txt = "return ".concat(wrapData.item, semicolon);
       } else if (type === 'json') {
-        wrapData.txt = funcName + "('".concat(wrapData.item, "', JSON.stringify(", wrapData.item, ", null, 2)", semicolon);
+        wrapData.txt = funcName + "('".concat(wrapData.item, "', JSON.stringify(", wrapData.item, ", null, 2))", semicolon);
       } else {
         wrapData.txt = funcName + "('".concat(wrapData.item, "')", semicolon);
       }
