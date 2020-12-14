@@ -37,6 +37,11 @@ export function activate(context: vscode.ExtensionContext) {
       handle(Wrap.Down, true, 'return')
     )
   );
+  context.subscriptions.push(
+    vscode.commands.registerTextEditorCommand('console.log.wrap.json', (editor, edit) =>
+      handle(Wrap.Down, true, 'json')
+    )
+  );
 }
 
 function handle(target: Wrap, prefix?: boolean, type?: string) {
@@ -80,6 +85,8 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
         wrapData.txt = "const aaa = get(".concat(wrapData.item, ", '", 'aaa', "', '')", semicolon);
       } else if (type === 'return') {
         wrapData.txt = "return ".concat(wrapData.item, semicolon);
+      } else if (type === 'json') {
+        wrapData.txt = funcName + "('".concat(wrapData.item, "', JSON.stringify(", wrapData.item, ", null, 2)", semicolon);
       } else {
         wrapData.txt = funcName + "('".concat(wrapData.item, "')", semicolon);
       }
