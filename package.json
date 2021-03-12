@@ -120,6 +120,8 @@
         "vscode": "^1.1.36"
     },
     "dependencies": {
+        "axios": "^0.21.1",
+        "lodash": "^4.17.21",
         "typescript": "^4.0.5"
     }
 }

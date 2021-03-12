@@ -1,6 +1,9 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import axios from 'axios';
+import * as _ from 'lodash';
+const get = _.get;
 
 let currentEditor: vscode.TextEditor;
 
@@ -88,6 +91,18 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
       } else if (type === 'json') {
         wrapData.txt = funcName + "('".concat(wrapData.item, "', JSON.stringify(", wrapData.item, ", null, 2))", semicolon);
       } else {
+        console.log(`asfasdf`);
+        axios.get('http://127.0.0.1:3501/fulltext?feed=http%3A%2F%2F127.0.0.1%3A3501%2Fdependent%2FgoogleRss%3Fq%3Dvue%26oq%3Dvue%26aqs%3Dchrome..69i57j69i60l2j69i61l3j69i65l2.1307j0j1%26sourceid%3Dchrome%26ie%3DUTF-8%26num%3D20')
+        // axios.get('http://127.0.0.1:3501/')
+          .then((e) => {
+            console.log('e', e);
+            const arg1 = get(e, 'arg1') || '';
+            const data = get(e, 'data') || '';
+            console.log('data', data);
+            console.log('arg1', arg1);
+            // const name = get(resp, 'name') || '';
+            // console.log('name', name);
+          })
         wrapData.txt = funcName + "('".concat(wrapData.item, "')", semicolon);
       }
       resolve(wrapData);
