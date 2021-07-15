@@ -13,43 +13,71 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.window.onDidChangeActiveTextEditor((editor) => (currentEditor = editor));
 
   context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand(
-      'console.log.wrap.nameValue',
+    vscode.commands.registerTextEditorCommand('console.log.wrap.nameValue',
       (editor, edit) => handle(Wrap.Down, true, 'nameValue')
     )
   );
+
+
   context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand('console.log.wrap.name', (editor, edit) =>
-      handle(Wrap.Down, true, 'name')
+    vscode.commands.registerTextEditorCommand('console.log.wrap.name',
+      (editor, edit) => handle(Wrap.Down, true, 'name')
     )
   );
+
+
   context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand(
-      'console.log.wrap.arguments',
+    vscode.commands.registerTextEditorCommand('console.log.wrap.arguments',
       (editor, edit) => handle(Wrap.Down, true, 'arguments')
     )
   );
+
+
   context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand(
-      'console.log.wrap.get',
+    vscode.commands.registerTextEditorCommand('console.log.wrap.get',
       (editor, edit) => handle(Wrap.Down, true, 'get')
     )
   );
+
+
   context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand('console.log.wrap.return', (editor, edit) =>
-      handle(Wrap.Down, true, 'return')
+    vscode.commands.registerTextEditorCommand('console.log.wrap.return',
+      (editor, edit) => handle(Wrap.Down, true, 'return')
     )
   );
+
+
   context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand('console.log.wrap.json', (editor, edit) =>
-      handle(Wrap.Down, true, 'json')
+    vscode.commands.registerTextEditorCommand('console.log.wrap.json',
+      (editor, edit) => handle(Wrap.Down, true, 'json')
     )
   );
+
+
+  context.subscriptions.push(
+    vscode.commands.registerTextEditorCommand('console.log.wrap.map',
+      (editor, edit) => handle(Wrap.Down, true, 'map')
+    )
+  );
+
+
+  context.subscriptions.push(
+    vscode.commands.registerTextEditorCommand('console.log.wrap.for',
+      (editor, edit) => handle(Wrap.Down, true, 'for')
+    )
+  );
+
+
+  context.subscriptions.push(
+    vscode.commands.registerTextEditorCommand('console.log.wrap.forEach',
+      (editor, edit) => handle(Wrap.Down, true, 'forEach')
+    )
+  );
+
 }
 
 function handle(target: Wrap, prefix?: boolean, type?: string) {
   new Promise((resolve, reject) => {
-    console.log('type', type);
     let sel = currentEditor.selection;
     let len = sel.end.character - sel.start.character;
 
@@ -68,7 +96,7 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
       let idx = doc.lineAt(lineNumber).firstNonWhitespaceCharacterIndex;
       let ind = doc.lineAt(lineNumber).text.substring(0, idx);
       const funcName = getSetting('functionName');
-      let wrapData = {
+      let wrapData: any = {
         txt: getSetting('functionName'),
         item: item,
         doc: doc,
@@ -79,7 +107,8 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
         sel: sel,
         lastLine: doc.lineCount - 1 == lineNumber,
       };
-      const semicolon = getSetting('useSemicolon') ? ';' : ''
+      // const semicolon = getSetting('useSemicolon') ? ';' : ''
+      const semicolon = ';';
       if (type === 'nameValue') {
         wrapData.txt = funcName + "('".concat(wrapData.item, "', ", wrapData.item, ')', semicolon);
       } else if (type === 'arguments') {
@@ -90,19 +119,22 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
         wrapData.txt = "return ".concat(wrapData.item, semicolon);
       } else if (type === 'json') {
         wrapData.txt = funcName + "('".concat(wrapData.item, "', JSON.stringify(", wrapData.item, ", null, 2))", semicolon);
+      } else if (type === 'map') {
+        wrapData.txt = `${wrapData.item}.map((item) => {
+  return {
+    ...item,
+  };
+})`
+      } else if (type === 'for') {
+        wrapData.txt = `for (let index = 0; index < ${wrapData.item}.length; index++) {
+          const item = ${wrapData.item}[index];
+          
+        }`
+      } else if (type === 'forEach') {
+        wrapData.txt = `${wrapData.item}.forEach(item => {
+          
+        });`
       } else {
-        console.log(`asfasdf`);
-        // axios.get('http://127.0.0.1:3501/fulltext?feed=http%3A%2F%2F127.0.0.1%3A3501%2Fdependent%2FgoogleRss%3Fq%3Dvue%26oq%3Dvue%26aqs%3Dchrome..69i57j69i60l2j69i61l3j69i65l2.1307j0j1%26sourceid%3Dchrome%26ie%3DUTF-8%26num%3D20')
-        axios.get('http://127.0.0.1:3501/')
-          .then((e) => {
-            console.log('e', e);
-            const data = get(e, 'data') || '';
-            console.log('data', data);
-            const items = get(data, 'items') || [];
-            console.log('items', items);
-            // const name = get(resp, 'name') || '';
-            // console.log('name', name);
-          })
         wrapData.txt = funcName + "('".concat(wrapData.item, "')", semicolon);
       }
       resolve(wrapData);
@@ -133,13 +165,13 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
         });
     })
     .catch((message) => {
-      console.log('vscode-wrap-console REJECTED_PROMISE : ' + message);
     });
 }
 
 function getSetting(setting: string) {
   return vscode.workspace.getConfiguration('wrap-console-log-simple')[setting];
 }
+
 
 interface WrapData {
   txt: string;

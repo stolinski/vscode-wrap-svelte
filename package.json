@@ -32,6 +32,9 @@
         "onCommand:console.log.wrap.arguments",
         "onCommand:console.log.wrap.get",
         "onCommand:console.log.wrap.return",
+        "onCommand:console.log.wrap.map",
+        "onCommand:console.log.wrap.for",
+        "onCommand:console.log.wrap.forEach",
         "onCommand:console.log.wrap.json"
     ],
     "main": "out/extension.js",
@@ -76,6 +79,18 @@
                 "title": "console.log.wrap.return"
             },
             {
+                "command": "console.log.wrap.map",
+                "title": "console.log.wrap.map"
+            },
+            {
+                "command": "console.log.wrap.for",
+                "title": "console.log.wrap.for"
+            },
+            {
+                "command": "console.log.wrap.forEach",
+                "title": "console.log.wrap.forEach"
+            },
+            {
                 "command": "console.log.wrap.json",
                 "title": "console.log.wrap.json"
             }
@@ -104,6 +119,21 @@
             {
                 "command": "console.log.wrap.return",
                 "key": "alt+a",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "console.log.wrap.map",
+                "key": "alt+l",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "console.log.wrap.for",
+                "key": "alt+l",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "console.log.wrap.forEach",
+                "key": "alt+l",
                 "when": "editorTextFocus"
             },
             {
