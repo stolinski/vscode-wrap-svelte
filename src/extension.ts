@@ -53,7 +53,16 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
-
+  context.subscriptions.push(
+    vscode.commands.registerTextEditorCommand('console.log.wrap.block',
+      (editor, edit) => handle(Wrap.Down, true, 'block')
+    )
+  );
+  context.subscriptions.push(
+    vscode.commands.registerTextEditorCommand('console.log.wrap.labelValue',
+      (editor, edit) => handle(Wrap.Down, true, 'highlight')
+    )
+  );
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand('console.log.wrap.map',
       (editor, edit) => handle(Wrap.Down, true, 'map')
@@ -119,6 +128,11 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
         wrapData.txt = "return ".concat(wrapData.item, semicolon);
       } else if (type === 'json') {
         wrapData.txt = funcName + "('".concat(wrapData.item, "', JSON.stringify(", wrapData.item, ", null, 2))", semicolon);
+      } else if (type === 'block') {
+        wrapData.txt = funcName + "('".concat("console.log('\\n%c --------- ", wrapData.item, " --------- ', 'background:yellow; color:blue; font-weight:600;\\n')", semicolon);
+
+      } else if (type === 'labelValue') {
+        wrapData.txt = funcName + "('".concat("console.log('\\n%c ", wrapData.item, "', 'color:green; font-weight:600;\\n',", wrapData.item, "))", semicolon);
       } else if (type === 'map') {
         wrapData.txt = `${wrapData.item}.map((item) => {
   return {
