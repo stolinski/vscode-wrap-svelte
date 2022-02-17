@@ -35,6 +35,8 @@
         "onCommand:console.log.wrap.map",
         "onCommand:console.log.wrap.for",
         "onCommand:console.log.wrap.forEach",
+        "onCommand:console.log.wrap.block",
+        "onCommand:console.log.wrap.labelValue",
         "onCommand:console.log.wrap.json"
     ],
     "main": "out/extension.js",
