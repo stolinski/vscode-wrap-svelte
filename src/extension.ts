@@ -129,9 +129,9 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
       } else if (type === 'json') {
         wrapData.txt = funcName + "('".concat(wrapData.item, "', JSON.stringify(", wrapData.item, ", null, 2))", semicolon);
       } else if (type === 'block') {
-        wrapData.txt = funcName + "('".concat("\\n%c --------- ", wrapData.item, " --------- ', 'background:yellow; color:blue; font-weight:600;\\n')", semicolon);
+        wrapData.txt = funcName + "('".concat("%c--------- ", wrapData.item, " --------- ', 'background:yellow; color:blue; font-weight:600;')", semicolon);
       } else if (type === 'labelValue') {
-        wrapData.txt = funcName + "('".concat("\\n%c ", wrapData.item, "', 'color:green; font-weight:600;\\n', ", wrapData.item, ")", semicolon);
+        wrapData.txt = funcName + "('".concat("%c", wrapData.item, "', 'color:green; font-weight:600;', ", wrapData.item, ")", semicolon);
       } else if (type === 'map') {
         wrapData.txt = `${wrapData.item}.map((item) => {
   return {
