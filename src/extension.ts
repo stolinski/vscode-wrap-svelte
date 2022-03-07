@@ -131,7 +131,7 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
       } else if (type === 'block') {
         wrapData.txt = funcName + "('".concat("%c--------- ", wrapData.item, " --------- ', 'background:yellow; color:blue; font-weight:600;')", semicolon);
       } else if (type === 'labelValue') {
-        wrapData.txt = funcName + "('".concat("%c", wrapData.item, "', 'color:green; font-weight:600;', ", wrapData.item, ")", semicolon);
+        wrapData.txt = funcName + "('".concat("%c ", wrapData.item, "', 'color:green; font-weight:600;', ", wrapData.item, ")", semicolon);
       } else if (type === 'map') {
         wrapData.txt = `${wrapData.item}.map((item) => {
   return {
