@@ -2,6 +2,7 @@
     "name": "vscode-wrap-console-log-simple",
     "displayName": "Wrap Console Log Simple",
     "description": "Wrap to console.log(or any function name) by word or selection",
+    "license": "MIT",
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
         "compile": "tsc -watch -p ./",
@@ -12,7 +13,7 @@
         "type": "git",
         "url": "https://github.com/wooodhead/vscode-wrap-console-log-simple"
     },
-    "version": "1.6.25",
+    "version": "1.6.26",
     "publisher": "wooodhead",
     "icon": "images/icon.png",
     "engines": {
@@ -36,8 +37,8 @@
         "onCommand:console.log.wrap.for",
         "onCommand:console.log.wrap.forEach",
         "onCommand:console.log.wrap.block",
-        "onCommand:console.log.wrap.labelValue",
-        "onCommand:console.log.wrap.json"
+        "onCommand:console.log.wrap.json",
+        "onCommand:console.log.wrap.expect"
     ],
     "main": "out/extension.js",
     "contributes": {
@@ -95,6 +96,10 @@
             {
                 "command": "console.log.wrap.json",
                 "title": "console.log.wrap.json"
+            },
+            {
+                "command": "console.log.wrap.expect",
+                "title": "console.log.wrap.expect"
             }
         ],
         "keybindings": [
@@ -149,7 +154,7 @@
                 "when": "editorTextFocus"
             },
             {
-                "command": "console.log.wrap.labelValue",
+                "command": "console.log.wrap.expect",
                 "key": "alt+t",
                 "when": "editorTextFocus"
             }
@@ -159,11 +164,12 @@
         "@types/mocha": "^2.2.32",
         "@types/node": "^6.0.40",
         "mocha": "^2.3.3",
-        "vscode": "^1.1.36"
+        "vscode": "^1.1.37"
     },
     "dependencies": {
         "axios": "^0.21.1",
         "lodash": "^4.17.21",
-        "typescript": "^4.0.5"
+        "typescript": "^4.0.5",
+        "vsce": "^2.15.0"
     }
 }

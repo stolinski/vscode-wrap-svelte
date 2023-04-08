@@ -11,15 +11,18 @@ https://github.com/midnightsyntax/vscode-wrap-console-log
 This extension read the word under your cursor and insert a statement with the word:
 
 ```
-alt + L: console.log('variable');
+alt + E: console.log('variable');
 
-cmd + L: console.log('variable', variable);
+cmd + E: console.log('variable', variable);
 
-alt + G: console.log('variable', arguments);
+alt + A: new line;
 
-alt + E: const aaa = get('variable', 'aaa', '');
+alt + W: // comment line
 
-alt + A: return variable;
+cmd + J: console.log('variable', JSON.stringify(variable, null, 2));
+
+alt + F: expect(variable).toBeDefined();
+
 
 ```
 
@@ -38,10 +41,10 @@ debug('variable');
 debug('variable', variable);
 ```
 
-# CodeXP.io
+# CodeXP.link
 Search in 180M open source javascript projects.
 
-https://codexp.io/npm/1/react,redux,passport
+https://codexp.link
 
 ![image](https://user-images.githubusercontent.com/5668806/145698450-659d32f8-94d0-4a3e-8adc-fb66443e33dd.png)
 

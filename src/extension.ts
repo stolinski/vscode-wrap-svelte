@@ -1,9 +1,7 @@
 'use strict';
 
-import * as vscode from 'vscode';
-import axios from 'axios';
 import * as _ from 'lodash';
-const get = _.get;
+import * as vscode from 'vscode';
 
 let currentEditor: vscode.TextEditor;
 
@@ -58,11 +56,11 @@ export function activate(context: vscode.ExtensionContext) {
       (editor, edit) => handle(Wrap.Down, true, 'block')
     )
   );
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand('console.log.wrap.labelValue',
-      (editor, edit) => handle(Wrap.Down, true, 'labelValue')
-    )
-  );
+  // context.subscriptions.push(
+  //   vscode.commands.registerTextEditorCommand('console.log.wrap.labelValue',
+  //     (editor, edit) => handle(Wrap.Down, true, 'labelValue')
+  //   )
+  // );
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand('console.log.wrap.map',
       (editor, edit) => handle(Wrap.Down, true, 'map')
@@ -80,6 +78,12 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand('console.log.wrap.forEach',
       (editor, edit) => handle(Wrap.Down, true, 'forEach')
+    )
+  );
+
+    context.subscriptions.push(
+    vscode.commands.registerTextEditorCommand('console.log.wrap.expect',
+      (editor, edit) => handle(Wrap.Down, true, 'expect')
     )
   );
 
@@ -130,8 +134,12 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
         wrapData.txt = funcName + "('".concat(wrapData.item, "', JSON.stringify(", wrapData.item, ", null, 2))", semicolon);
       } else if (type === 'block') {
         wrapData.txt = "console.info('".concat("\\n%c--------- ", wrapData.item, " --------- \\n', 'background:yellow; color:blue; font-weight:600;')", semicolon);
-      } else if (type === 'labelValue') {
-        wrapData.txt = "console.info('".concat("%c ", wrapData.item, "', 'color:green; font-weight:600;', ", wrapData.item, ")", semicolon);
+      } 
+      // else if (type === 'labelValue') {
+      //   wrapData.txt = "console.info('".concat("%c ", wrapData.item, "', 'color:green; font-weight:600;', ", wrapData.item, ")", semicolon);
+      // }
+       else if (type === 'expect') {
+        wrapData.txt = "expect(".concat(wrapData.item, ").toBeDefined();");
       } else if (type === 'map') {
         wrapData.txt = `${wrapData.item}.map((item) => {
   return {
