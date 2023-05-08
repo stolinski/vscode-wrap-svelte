@@ -41,6 +41,13 @@ debug('variable');
 debug('variable', variable);
 ```
 
+# WindChat - ChatGPT TailwindCSS HTML Previewer
+
+https://chrome.google.com/webstore/devconsole/bc648ec4-1675-45f6-96a6-93ec942c93ec/ipafbgdehdljgphjgfmpkohhbelebdhm/analytics/impressions
+
+![](./images/2023-05-08-18-43-11.png)
+
+
 # CodeXP.link
 Search in 180M open source javascript projects.
 
