@@ -133,7 +133,7 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
       } else if (type === 'json') {
         wrapData.txt = funcName + "('".concat(wrapData.item, "', JSON.stringify(", wrapData.item, ", null, 2))", semicolon);
       } else if (type === 'block') {
-        wrapData.txt = "console.info('".concat("\\n%c--------- ", wrapData.item, " --------- \\n', 'background:yellow; color:blue; font-weight:600;')", semicolon);
+        wrapData.txt = "console.log('".concat("\\n%c--------- ", wrapData.item, " --------- \\n', 'background:yellow; color:blue; font-weight:600;')", semicolon);
       } 
       // else if (type === 'labelValue') {
       //   wrapData.txt = "console.info('".concat("%c ", wrapData.item, "', 'color:green; font-weight:600;', ", wrapData.item, ")", semicolon);
