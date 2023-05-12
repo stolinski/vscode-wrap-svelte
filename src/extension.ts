@@ -81,7 +81,7 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
-    context.subscriptions.push(
+  context.subscriptions.push(
     vscode.commands.registerTextEditorCommand('console.log.wrap.expect',
       (editor, edit) => handle(Wrap.Down, true, 'expect')
     )
@@ -123,7 +123,16 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
       // const semicolon = getSetting('useSemicolon') ? ';' : ''
       const semicolon = ';';
       if (type === 'nameValue') {
-        wrapData.txt = funcName + "('".concat(wrapData.item, "', ", wrapData.item, ')', semicolon);
+        if (wrapData.item.includes(',')) {
+          const items = wrapData.item.split(',').map((item) => item.trim())
+          console.log('items', items);
+          wrapData.txt = '';
+          for (const item of items) {
+            wrapData.txt += (funcName + "('".concat(item, "', ", item, ')', semicolon) + "\n");
+          }
+        } else {
+          wrapData.txt = funcName + "('".concat(wrapData.item, "', ", wrapData.item, ')', semicolon);
+        }
       } else if (type === 'arguments') {
         wrapData.txt = funcName + "('".concat(wrapData.item, "', ", 'arguments', ')', semicolon);
       } else if (type === 'get') {
@@ -134,11 +143,11 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
         wrapData.txt = funcName + "('".concat(wrapData.item, "', JSON.stringify(", wrapData.item, ", null, 2))", semicolon);
       } else if (type === 'block') {
         wrapData.txt = "console.log('".concat("\\n%c--------- ", wrapData.item, " --------- \\n', 'background:yellow; color:blue; font-weight:600;')", semicolon);
-      } 
+      }
       // else if (type === 'labelValue') {
       //   wrapData.txt = "console.info('".concat("%c ", wrapData.item, "', 'color:green; font-weight:600;', ", wrapData.item, ")", semicolon);
       // }
-       else if (type === 'expect') {
+      else if (type === 'expect') {
         wrapData.txt = "expect(".concat(wrapData.item, ").toBeDefined();");
       } else if (type === 'map') {
         wrapData.txt = `${wrapData.item}.map((item) => {
