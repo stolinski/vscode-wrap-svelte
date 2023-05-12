@@ -11,9 +11,15 @@ https://github.com/midnightsyntax/vscode-wrap-console-log
 This extension read the word under your cursor and insert a statement with the word:
 
 ```
-alt + E: console.log('variable');
-
 cmd + E: console.log('variable', variable);
+
+> New feature: print multiple variables
+aaa,bbb,ccc
+console.log('aaa', aaa);
+console.log('bbb', bbb);
+console.log('ccc', ccc);
+
+alt + E: console.log('variable');
 
 alt + A: new line;
 
@@ -21,7 +27,9 @@ alt + W: // comment line
 
 cmd + J: console.log('variable', JSON.stringify(variable, null, 2));
 
-alt + F: expect(variable).toBeDefined();
+alt + G: console.log('\n%c--------- variable --------- \n', 'background:yellow; color:blue; font-weight:600;');
+
+alt + T: expect(variable).toBeDefined();
 
 
 ```

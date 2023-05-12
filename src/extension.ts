@@ -124,11 +124,10 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
       const semicolon = ';';
       if (type === 'nameValue') {
         if (wrapData.item.includes(',')) {
-          const items = wrapData.item.split(',').map((item) => item.trim())
-          console.log('items', items);
+          const items = wrapData.item.split(',').map((item) => item.trim()).filter(i => i)
           wrapData.txt = '';
           for (const item of items) {
-            wrapData.txt += (funcName + "('".concat(item, "', ", item, ')', semicolon) + "\n");
+            wrapData.txt += (funcName + "('".concat(item, "', ", item, ')', semicolon) + "\n" + ind);
           }
         } else {
           wrapData.txt = funcName + "('".concat(wrapData.item, "', ", wrapData.item, ')', semicolon);
