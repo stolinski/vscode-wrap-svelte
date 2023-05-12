@@ -1,5 +1,5 @@
 # Demo
-![demo.gif](https://raw.githubusercontent.com/WooodHead/vscode-wrap-console-log-simple/master/demo2.gif)
+![demo2.gif](https://raw.githubusercontent.com/WooodHead/vscode-wrap-console-log-simple/master/demo2.gif)
 
 ![demo.gif](https://raw.githubusercontent.com/WooodHead/vscode-wrap-console-log-simple/master/demo.gif)
 # source code
