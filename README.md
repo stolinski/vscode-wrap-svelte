@@ -1,4 +1,6 @@
 # Demo
+![demo.gif](https://raw.githubusercontent.com/WooodHead/vscode-wrap-console-log-simple/master/2023-05-12 13.29.58.gif)
+
 ![demo.gif](https://raw.githubusercontent.com/WooodHead/vscode-wrap-console-log-simple/master/demo.gif)
 # source code
 https://github.com/WooodHead/vscode-wrap-console-log-simple

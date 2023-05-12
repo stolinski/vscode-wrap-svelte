@@ -120,11 +120,10 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
         sel: sel,
         lastLine: doc.lineCount - 1 == lineNumber,
       };
-      // const semicolon = getSetting('useSemicolon') ? ';' : ''
       const semicolon = ';';
       if (type === 'nameValue') {
         if (wrapData.item.includes(',')) {
-          const items = wrapData.item.split(',').map((item) => item.trim()).filter(i => i)
+          const items = wrapData.item.split(',').map((item) => item?.split(':')?.[0]?.split('?')?.[0].trim()).filter(i => i)
           wrapData.txt = '';
           for (const item of items) {
             wrapData.txt += (funcName + "('".concat(item, "', ", item, ')', semicolon) + "\n" + ind);
