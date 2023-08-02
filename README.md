@@ -30,7 +30,7 @@ alt + W: // comment line
 
 cmd + J: console.log('variable', JSON.stringify(variable, null, 2));
 
-alt + G: console.log('\n%c--------- variable --------- \n', 'background:yellow; color:blue; font-weight:600;');
+alt + G: console.log('\n\n%c--------- variable ---------', 'background:yellow; color:blue; font-weight:600;');
 
 alt + T: expect(variable).toBeDefined();
 
