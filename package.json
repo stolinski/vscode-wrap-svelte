@@ -1,5 +1,5 @@
 {
-    "version": "1.6.30",
+    "version": "1.6.31",
     "name": "vscode-wrap-console-log-simple",
     "displayName": "Wrap Console Log Simple",
     "description": "Wrap to console.log(or any function name) by word or selection",
