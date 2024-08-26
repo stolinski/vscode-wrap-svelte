@@ -1,175 +1,65 @@
 {
-    "version": "1.6.31",
-    "name": "vscode-wrap-console-log-simple",
-    "displayName": "Wrap Console Log Simple",
-    "description": "Wrap to console.log(or any function name) by word or selection",
-    "license": "MIT",
-    "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "build": "vsce package -o ./packages"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/wooodhead/vscode-wrap-console-log-simple"
-    },
-    "publisher": "wooodhead",
-    "icon": "images/icon.png",
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "categories": [
-        "Formatters"
+  "version": "0.0.1",
+  "name": "vscode-wrap-svelte",
+  "displayName": "Svelte Wrap",
+  "description": "Wrap to any var in $inspect()",
+  "license": "MIT",
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -watch -p ./",
+    "build": "vsce package -o ./packages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stolinski/vscode-wrap-svelte"
+  },
+  "publisher": "drop-in",
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.7.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "keywords": [
+    "wrap",
+    "console",
+    "log"
+  ],
+  "activationEvents": [
+    "onCommand:csvelte.wrap.nameValue"
+  ],
+  "main": "out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "svelte.wrap.inspect",
+        "title": "Wrap var in $inspect()"
+      },
+      {
+        "command": "svelte.wrap.effect",
+        "title": "Wrap line in $effect()"
+      }
     ],
-    "keywords": [
-        "wrap",
-        "console",
-        "log"
-    ],
-    "activationEvents": [
-        "onCommand:console.log.wrap.nameValue",
-        "onCommand:console.log.wrap.name",
-        "onCommand:console.log.wrap.arguments",
-        "onCommand:console.log.wrap.get",
-        "onCommand:console.log.wrap.return",
-        "onCommand:console.log.wrap.map",
-        "onCommand:console.log.wrap.for",
-        "onCommand:console.log.wrap.forEach",
-        "onCommand:console.log.wrap.block",
-        "onCommand:console.log.wrap.json",
-        "onCommand:console.log.wrap.expect"
-    ],
-    "main": "out/extension.js",
-    "contributes": {
-        "configuration": {
-            "title": "Wrap Console Log Simple",
-            "type": "object",
-            "properties": {
-                "wrap-console-log-simple.functionName": {
-                    "title": "function name",
-                    "description": "Replace console.log with any function name, e.g.: debug('variable', variable); ",
-                    "type": "string",
-                    "default": "console.log"
-                },
-                "wrap-console-log-simple.useSemicolon": {
-                    "title": "use semicolon",
-                    "description": "Use semicolon at the end of the statements ",
-                    "type": "boolean",
-                    "default": true
-                }
-            }
-        },
-        "commands": [
-            {
-                "command": "console.log.wrap.nameValue",
-                "title": "console.log.wrap.nameValue"
-            },
-            {
-                "command": "console.log.wrap.name",
-                "title": "console.log.wrap.name"
-            },
-            {
-                "command": "console.log.wrap.arguments",
-                "title": "console.log.wrap.arguments"
-            },
-            {
-                "command": "console.log.wrap.get",
-                "title": "console.log.wrap.get"
-            },
-            {
-                "command": "console.log.wrap.return",
-                "title": "console.log.wrap.return"
-            },
-            {
-                "command": "console.log.wrap.map",
-                "title": "console.log.wrap.map"
-            },
-            {
-                "command": "console.log.wrap.for",
-                "title": "console.log.wrap.for"
-            },
-            {
-                "command": "console.log.wrap.forEach",
-                "title": "console.log.wrap.forEach"
-            },
-            {
-                "command": "console.log.wrap.json",
-                "title": "console.log.wrap.json"
-            },
-            {
-                "command": "console.log.wrap.expect",
-                "title": "console.log.wrap.expect"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "console.log.wrap.nameValue",
-                "key": "cmd+l",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.name",
-                "key": "alt+l",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.arguments",
-                "key": "alt+j",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.get",
-                "key": "alt+e",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.return",
-                "key": "alt+a",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.map",
-                "key": "alt+l",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.for",
-                "key": "alt+l",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.forEach",
-                "key": "alt+l",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.json",
-                "key": "cmd+j",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.block",
-                "key": "alt+g",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "console.log.wrap.expect",
-                "key": "alt+t",
-                "when": "editorTextFocus"
-            }
-        ]
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.32",
-        "@types/node": "^6.0.40",
-        "mocha": "^2.3.3",
-        "vscode": "^1.1.37"
-    },
-    "dependencies": {
-        "axios": "^0.21.1",
-        "lodash": "^4.17.21",
-        "typescript": "^4.0.5",
-        "vsce": "^2.15.0"
-    }
+    "keybindings": [
+      {
+        "command": "svelte.wrap.effect",
+        "key": "cmd+e",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "svelte.wrap.inspect",
+        "key": "cmd+i",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.40",
+    "vscode": "^1.1.37"
+  },
+  "dependencies": {
+    "typescript": "^4.0.5",
+    "vsce": "^2.15.0"
+  }
 }
