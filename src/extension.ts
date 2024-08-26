@@ -24,7 +24,12 @@ export function activate(context: vscode.ExtensionContext) {
 function handle(target: Wrap, prefix?: boolean, type?: string) {
   new Promise((resolve, reject) => {
     let sel = currentEditor.selection;
+    let doc = currentEditor.document;
+    let lineNumber = sel.active.line;
+    let selectedText = doc.getText(sel);
+
     let len = sel.end.character - sel.start.character;
+    let entireLine = doc.lineAt(lineNumber).text;
 
     let ran =
       len == 0
@@ -64,11 +69,13 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
             wrapData.txt += funcName + "('".concat(item, "', ", item, ")") + "\n" + ind;
           }
         }
-      } else if (type === "inspect") {
-        wrapData.txt = funcName + "('".concat(wrapData.item, "', ", "arguments", ")");
+      } else if (type === "effect") {
+        let inner = selectedText.length > 0 ? selectedText : entireLine;
 
-        // } else if (type === 'get') {
-        //   wrapData.txt = "const aaa = get(".concat(wrapData.item, ", '", 'aaa', "', '')", semicolon);
+        wrapData.txt = `$effect(() => {
+		${inner}
+	})`;
+        wrapData.replace = true; // Flag to replace the selection instead of inserting below
       } else if (type === "inspect") {
         wrapData.txt = `$inspect(${wrapData.item});`;
       }
@@ -115,13 +122,21 @@ function handle(target: Wrap, prefix?: boolean, type?: string) {
       }
       currentEditor
         .edit((e) => {
-          e.insert(
-            new vscode.Position(wrap.line, wrap.doc.lineAt(wrap.line).range.end.character),
-            "\n" + ((nxtLineInd > wrap.ind ? nxtLineInd : wrap.ind) + wrap.txt)
-          );
+          if (wrap.replace) {
+            // Replace the selection with the wrapped content
+            e.replace(wrap.sel, wrap.txt);
+          } else {
+            // Insert below as before
+            e.insert(
+              new vscode.Position(wrap.line, wrap.doc.lineAt(wrap.line).range.end.character),
+              "\n" + wrap.ind + wrap.txt
+            );
+          }
         })
         .then(() => {
-          currentEditor.selection = wrap.sel;
+          if (!wrap.replace) {
+            currentEditor.selection = wrap.sel;
+          }
         });
     })
     .catch((message) => {});
